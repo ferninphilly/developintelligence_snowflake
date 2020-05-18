@@ -47,7 +47,7 @@ Now click on your database name and we get to a screen with several tabs (under 
 
 ![hierarchy](./images/hierarchy.png)
 
-**Please take action here:** Let's create a schema here called "practice"
+**Please take action here:** Let's create a schema here called "practice".
 
 * **Stages:** Now _this_ is something you might not be used to seeing (and we'll cover this in more detail later). **Stages** in Snowflake are, essentially, external data repositories. I'm going to quote a pretty popular blog about it here:
 
