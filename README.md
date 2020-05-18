@@ -65,4 +65,52 @@ Now click on your database name and we get to a screen with several tabs (under 
 
 * **Pipes:** Snowflakes version of data pipelines...yet ANOTHER thing we'll be going deeper into later but the short version is: Snowpipes are sort of event driven data pipelines for loading data into Snowflake (so we can avoid having to use batches and COPY commands)
 
+## Let's install supporting software
 
+### SNOWSQL
+
+SnowSQL is the next-generation command line client for connecting to Snowflake to execute SQL queries and perform all DDL and DML operations, including loading data into and unloading data out of database tables.
+
+SNOWSQL can be run as an interactive shell right on your command line.
+Note that you **might need to enter your root password on installation**
+
+* For installation instructions on Mac please click [here](https://docs.snowflake.com/en/user-guide/snowsql-install-config.html#installing-snowsql-on-macos-using-homebrew-cask)
+
+* For installation instructions on Windows please click [here](https://docs.snowflake.com/en/user-guide/snowsql-install-config.html#installing-snowsql-on-microsoft-windows-using-the-installer)
+
+* For Linux installation please click [here](https://docs.snowflake.com/en/user-guide/snowsql-install-config.html#installing-snowsql-on-linux-using-the-rpm-package)
+
+## SNOWCD (Connectivity Diagnostics)
+
+![snowcd](./images/snowcd.jpg)
+
+How many of you have had random problems when trying to connect to a MYSQL, POSTGRES, Oracle, NETEZZA, MSSQL, etc database in the past?
+It's painful to troubleshoot those connectivity issues.
+SnowCD (the CD represents **Connectivity Diagnostics**) is a tool developed for Snowflake that will diagnose those connectivity problems and give you some help with figuring out where there are issues (we'll be using it in an upcoming lab).
+
+* Download and install the latest mac version [here](https://sfc-repo.snowflakecomputing.com/snowcd/mac64/latest/index.html)
+
+* Download and install the latest Windows version [here](https://sfc-repo.snowflakecomputing.com/snowcd/win64/index.html)
+
+* Download and install the latest Linux version [here](https://sfc-repo.snowflakecomputing.com/snowcd/linux/index.html)
+
+For installation instructions you can look [here](https://docs.snowflake.com/en/user-guide/snowcd.html)
+
+## Snowflake PYTHON Connector
+
+For this class we will be utilizing the PYTHON connector for Snowflake. The Python connector can be installed via PIP. The python requirements are: Python 3.5 or higher so please run `python --version` or (if you keep both, like me) `python3 --version`.
+
+We also need `pip` to be > 19.0 SO, just to make sure, please run:
+
+*  `python3 -m pip install --upgrade pip` 
+* (or `python -m pip install --upgrade pip`)
+
+Finally let's install the actual package with: 
+
+`pip3 install --upgrade snowflake-connector-python`
+
+## READY TO GO
+
+Okay...let's make this class happen!
+
+![makeitso](./images/makeitso.jpeg)
