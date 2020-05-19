@@ -84,6 +84,16 @@ Wait, WTF?
 SO...as it turns out we don't currently have sufficient permissions to run that user. That must be rectified quickly.
 In order to do this let's update our permissions to allow it. To do this we need to look at updating our **ROLE**
 
+So to do this we need to upgrade our role. 
+Let's take a quick look at what our role IS:
+
+`SELECT current_role()`
+
+Now- remember from our lecture portion how the users permissions work. Considering that:
+
+### CHALLENGE TWO: UPDATE YOUR ROLE SO THAT YOU CAN RUN THE CREATE USER COMMAND
+
+
 Snowflake’s approach to access control combines aspects from both of the following models:
 
 * **Discretionary Access Control (DAC):** Each object has an owner, who can in turn grant access to that object.
