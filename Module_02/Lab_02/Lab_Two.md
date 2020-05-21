@@ -91,14 +91,68 @@ Okay...so now we've created a role...we need to add privileges to him! So which 
 | USAGE                | Warehouse , Database , Schema                          | Grants ability to execute a USE <object> command on the object; also grants ability to execute a SHOW <objects> command on the objects within a database or schema; however, a contained object is only listed in the output if the executing role also has at least one privilege on the object.                                                                             |   |   |.
 
 SO...let's go ahead and add some privileges to our role. The first thing we want ot do with this is to allow our new role to **operate** on our warehouse.
+
 Basically- we want darth to be pretty powerful sooo....
 
 `GRANT operate ON warehouse deathstar to role darth_vader`
 
-AND let's give him privileges on our PUBLIC schema so...
+AND let's give his ROLE privileges on our PUBLIC schema so...
 
 `GRANT ALL ON DATABASE throneroom to role darth_vader`
 
 `GRANT ALL ON SCHEMA throneroom.public to ROLE darth_vader`
 
-And NOW
+OKAY! Awesome! So now we have our ROLE defined.
+So remember from the lecture portion that Snowflake is very ROLE based and not USER based (which is different)
+
+![access-control-relationships](./images/access-control-relationships.png)
+
+Before we go on let's take a look at the summary here! IF you find yourself getting lost here you can always run `SHOW GRANTS TO ROLE darth_vader` (go ahead and do this now)
+
+ALSO if you want to get a look at the ROLE situations with any objects in the hierarchy you can run this to find now (do it now):
+
+`SHOW GRANTS ON DATABASE throneroom`
+
+NOW let's go on and create a USER and assign them to the role. Another nice thing about SNOWFLAKE is that the commands are pretty straightforward...so let's take a look at one:
+
+`CREATE USER lukeskywalker PASSWORD='tatooinerocks' DEFAULT_ROLE = "public";`
+
+![skywalker](./images/skywalker.jpeg)
+
+Now we want to grant our new user LUKE some serious power. Let's give him the role of DARTH VADER (this was the emperor's plan so let's bring it to fruition):
+
+`GRANT ROLE darth_vader TO USER lukeskywalker`
+
+WAIT! NO!!! HE'S GOING TO BETRAY US!!
+
+`REVOKE ROLE darth_vader FROM USER lukeskywalker`
+
+Meh. Let's trust him again...
+
+`GRANT ROLE darth_vader TO USER lukeskywalker`
+
+AND let's check to make sure that we have successfully updated the user:
+
+`SHOW GRANTS TO USER lukeskywalker`
+
+Did you get that he now has DARTH_VADER powers? 
+
+![palpatineplan](./images/palpatineplan.jpeg)
+
+Now that you have successfully crushed the rebellion it's time to remove everything we've done. Fortunately, again, Snowflake makes this pretty easy. Let's go through and run each of these:
+
+```sql
+DROP DATABASE throneroom
+DROP ROLE darth_vader
+DROP USER lukeskywalker
+DROP WAREHOUSE deathstar 
+
+```
+
+Damn. Rebels win again...
+
+![deathstar](./images/deathstar.jpeg)
+
+### CHALLENGE TWO: CREATE A NEW WAREHOUSE, DATABASE, AND SCHEMA. CREATE A ROLE THAT HAS SELECT AND INSERT PERMISSIONS ON THAT SCHEMA. SHOW ALL OF THE GRANTS THAT YOU HAVE ON THESE OBJECTS. SEND COMMANDS TO INSTRUCTOR WHEN DONE ON CHAT
+
+### HEAD BACK TO LECTURE PORTION NOW
