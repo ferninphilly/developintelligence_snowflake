@@ -96,6 +96,79 @@ SnowCD (the CD represents **Connectivity Diagnostics**) is a tool developed for 
 
 For installation instructions you can look [here](https://docs.snowflake.com/en/user-guide/snowcd.html)
 
+NOTE- for macOSx users: You might want to run `brew cask install snowflake-snowsql` and that's absolutely fine but **NOTE: YOU WILL STILL NEED TO GO INTO `/Applications/SnowSQL.app/Contents/MacOS/snowsql` to run. 
+
+FINALLY: Type `snowsql -v` in a new terminal command. Was it successful? 
+
+IF NOT (especially with mac) you might have to go into your `~/.bash_profile` and add an alias as such:
+
+`vi ~/.bash_profile`
+
+THEN add this line:
+
+`alias snowsql="/Applications/SnowSQL.app/Contents/MacOS/snowsql"`
+
+THEN save and exit from `~/.bash_profile` with a `:wq`
+THEN once you are back on your terminal shell:
+`source ~/.bash_profile`
+THEN run `snowsql -v`
+You should get the version.
+
+NOW let's configure this...
+
+SNOWSQL put it's `config` file in your home directory /config so:
+`cd ~/.snowsql`
+Run a quick `ls` and you can see the list of files here. The most important one we'll be using here today is `config`. So let's `vi config`
+
+From inside this configuration section we'll want to use the `[connections]` section. You'll see a `connections.example` here. This is the section we want to head to. 
+NOW...let's fill this out with the following information:
+
+```bash
+  [connections.developintel]
+  accountname = {take the SNOWSWL URL, REMOVE https and JUST use up through the AWS region...so as an example `jc91620.eu-west-1`}
+  username = {Enter your username}
+  password = {Enter your password}
+  #dbname = mordor
+  #schemaname = public
+  #warehouse = hobbit
+```
+
+There are obviously **TONS** of optional areas that we can fill out around here. The key ones for right here that we want to use are "AUTOCOMPLETE" (because it's convenient) and then LOG_LEVEL= CRITICAL (logs are in a directory right next to the current config file). 
+
+OKAY...let's `:wq` out of this and try to connect. 
+From the terminal run this command:
+
+`snowsql -h`
+
+SO...we should see a list of all of the different connections parameters that we can use here to connect to our Snowflake instance. Obviously the biggest ones will be the `-c` and then `-u` for username and `-d` for database (you would be prompted on the command line for the password). 
+
+My advice is that you use the config file and just create different named profiles for various snowflake instances you might be connecting to (and various users you might use)...but the command line IS available for quick connection checks. 
+
+ALSO- for any DOCKER users out there- take note of how we can use environment variables for a lot of these connection parameters. If you are using any sort of containerization with snowflake (DOCKER, LAMBDAS, etc) you can simply assign connection parameters to various environment variables and there is your connection string instantly!
+
+![advice](./images/advice.jpeg)
+
+
+So okay...let's go ahead and connect from the command line:
+
+`snowsql -c developintel -o log_level=DEBUG`
+
+I included `-o log_level=DEBUG` just as an example here to show you how you can overwrite the config file from the command line here (from CRITICAL -> DEBUG).
+The `-c` is how we connect.
+
+Hopefully you end up in something that looks like this:
+
+```bash
+
+snowsql -c developintel -o log_level=DEBUG
+* SnowSQL * v1.2.5
+Type SQL statements or !help
+fernincornwall#(no warehouse)@(no database).(no schema)>
+
+```
+
+If so then we're good! 
+
 ## Snowflake PYTHON Connector
 
 For this class we will be utilizing the PYTHON connector for Snowflake. The Python connector can be installed via PIP. The python requirements are: Python 3.5 or higher so please run `python --version` or (if you keep both, like me) `python3 --version`.
