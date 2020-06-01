@@ -113,7 +113,6 @@ SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10000.CUSTOMER;
 ```
 
 This table was created much faster with the large data warehouse.
-*Only took 3 min to create the table this time*
 
  
  10% done
@@ -129,6 +128,8 @@ This table was created much faster with the large data warehouse.
  100% done
 ![Image of 100 percent done ](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/16_qp_create_cluster_table_step2_create_100.png)
 
+*Only took 3 min to create the table this time*
+
 ### So let's take a look at the clustering now!  
 
 
@@ -139,15 +140,16 @@ An item to note is that since this table already has clustering added you don't 
 SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_CLUSTER')
 
 ```
-
-As you can see the table is barely clustered. 
-![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
-
 I bet you expect the table to be clustered already...
 
 ![Alt Text](https://media.giphy.com/media/Wq9RLX06zRg4UM42Qf/giphy.gif)
 
+As you can see the table is barely clustered. 
+![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
 
+BUT WHY! 
+
+![Alt Text](https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif) 
 Well because it takes time for a table to be optimized
 
  
@@ -158,7 +160,6 @@ Well because it takes time for a table to be optimized
  8min in 
 ![Image of clustering 8min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/21_clustering_info_cluster_market_8min.png)
 
-![Alt Text](https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif) 
  
  10min in 
 ![Image of clustering 10min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/23_clustering_info_cluster_market_10min.png)
