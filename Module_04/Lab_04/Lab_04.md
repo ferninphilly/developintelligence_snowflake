@@ -1,1 +1,3 @@
-# Lab 4
+# Lab Four
+## Clustering and Micro-Partitions in SnowFlake
+
