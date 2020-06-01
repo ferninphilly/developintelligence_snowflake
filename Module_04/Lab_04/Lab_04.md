@@ -185,6 +185,12 @@ Well because it takes time for a table to be optimized
 
 ### Reclustering an unclustered table
 
+Remember this slide?? 
+
+![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/reclustering.png) 
+
+This shows a table that has already been created and how it is relustered.  
+
 
 ![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/36_alter_table_nocluster.png)
 
