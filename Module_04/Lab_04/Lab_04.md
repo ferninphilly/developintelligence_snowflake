@@ -76,7 +76,7 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_NOCLUSTER
 
 Let's create a table with clustering from the start. We will also switch to a Large warehouse to speed up the creation.  In order to see what how the table was created we can use the function **get_ddl**.
 
-![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/get_ddl.png)
+![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Images/Lab_04/Images/get_ddl.png)
 
 ```sql
 
@@ -87,7 +87,7 @@ This function allows you to see what the column names are and what the column ty
  
 Now we can create the new table that will be clustered.
 
-![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/12_create_cluster_table.png)
+![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/12_create_cluster_table.png)
 
 ```sql
 
@@ -110,16 +110,16 @@ SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10000.CUSTOMER;
 This table was created much faster with the large data warehouse.
 *Only took 3 min to create the table this time*
 
-![Image of 10 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/13_qp_create_cluster_table_step2_create_10.png)
-![Image of 30 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/14_qp_create_cluster_table_step2_create_20.png)
-![Image of 80 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/15_qp_create_cluster_table_step2_create_80.png)
-![Image of 100 percent done ](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/16_qp_create_cluster_table_step2_create_100.png)
+![Image of 10 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/13_qp_create_cluster_table_step2_create_10.png)
+![Image of 30 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/14_qp_create_cluster_table_step2_create_20.png)
+![Image of 80 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/15_qp_create_cluster_table_step2_create_80.png)
+![Image of 100 percent done ](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/16_qp_create_cluster_table_step2_create_100.png)
 
 So let's take a look at the clustering now!  I bet you expect the table to be clustered already...
 
 ![Alt Text](https://media.giphy.com/media/Wq9RLX06zRg4UM42Qf/giphy.gif)
 
-![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/19_clustering_info_cluster_market_4min.png)
+![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
 
 Since this table already has clustering added you don't have to enter in the column that you are getting for clustering info on it.  It will autmatically pick the clustered column.
 
@@ -129,23 +129,23 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_CLUSTER')
 
 ```
 
-![Image of clustering 6min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/20_clustering_info_cluster_market_6min.png)
+![Image of clustering 6min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/20_clustering_info_cluster_market_6min.png)
 
-![Image of clustering 8min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/21_clustering_info_cluster_market_8min.png)
+![Image of clustering 8min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/21_clustering_info_cluster_market_8min.png)
 
-![Image of clustering 10min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/23_clustering_info_cluster_market_10min.png)
+![Image of clustering 10min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/23_clustering_info_cluster_market_10min.png)
 
-![Image of clustering 15 min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/24_clustering_info_cluster_market_15min.png)
+![Image of clustering 15 min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/24_clustering_info_cluster_market_15min.png)
 
-![Image of clustering 20min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/25_clustering_info_cluster_market_20min.png)
+![Image of clustering 20min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/25_clustering_info_cluster_market_20min.png)
 
-![Image of clustering 2hrs](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/26_clustering_info_cluster_market_2hr.png)
+![Image of clustering 2hrs](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/26_clustering_info_cluster_market_2hr.png)
 
 *It took 20 mins for the clustering to be added even though we clustered the table from the beginning*
 
 **Question** What if we add clustering after the table is created?
 
-![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/36_alter_table_nocluster.png)
+![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/36_alter_table_nocluster.png)
 
 ```sql
 
@@ -153,7 +153,7 @@ ALTER TABLE MY_PRACTICE_DB.PRACTICE.CUSTOMER_NOCLUSTER CLUSTER BY (C_MKTSEGMENT)
 
 ```
 
-![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/37_no_change_nocluster.png)
+![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/37_no_change_nocluster.png)
 
 *Unfortunately this does not cause the table to be clustered imediately.  You sill still need to recluster the table.*
 
@@ -163,13 +163,13 @@ ALTER TABLE MY_PRACTICE_DB.PRACTICE.CUSTOMER_NOCLUSTER RECLUSTER;
 
 ```
 
-![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/40_qp_recluster.png)
+![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/40_qp_recluster.png)
 
-![Image of reclustering time to complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/39_time_complete_recluster.png)
+![Image of reclustering time to complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/39_time_complete_recluster.png)
 
 *It took about 6 min to recluster the table*
 
-![Image of reclustered table](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/41_reclustered_table.png)
+![Image of reclustered table](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/41_reclustered_table.png)
 
 
 ### Creating a table without clustering but having an order added
@@ -185,21 +185,21 @@ ORDER BY C_MKTSEGMENT;
 
 ```
 
-![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/29_qp_create_nocluster_order_sort.png)
+![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/29_qp_create_nocluster_order_sort.png)
 
-![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/30_qp_create_nocluster_order_tablescan2.png)
+![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/30_qp_create_nocluster_order_tablescan2.png)
 
-![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/31_qp_create_nocluster_order_tablescan3.png)
+![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/31_qp_create_nocluster_order_tablescan3.png)
 
-![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/32_qp_create_nocluster_order_tablescan4.png)
+![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/32_qp_create_nocluster_order_tablescan4.png)
 
-![Image of creating a no cluster table with order took only 7min to complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/34_created_nocluster_order_7min.png)
+![Image of creating a no cluster table with order took only 7min to complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/34_created_nocluster_order_7min.png)
 
 *This table only took 7 min to complete and it is completely clustered* 
 
 ![Alt Text](https://media.giphy.com/media/lRnUWhmllPI9a/giphy.gif)
 
-![Image of creating a no cluster table with order clustered](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/35_clustering_info_nocluster_order_cluster_complete_imediate.png)
+![Image of creating a no cluster table with order clustered](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/35_clustering_info_nocluster_order_cluster_complete_imediate.png)
 
 **Question** Which would you choose to use?
 
