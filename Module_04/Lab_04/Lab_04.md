@@ -1,7 +1,7 @@
 # Lab Four
 ## Clustering and Micro-Partitions in SnowFlake
 Earlier we talked about clustering and micro-partitions in SnowFlake and what they are.  
-![Image of a clustered table with 4 micro-partitions]((./Images/clustering.png))
+![Image of a clustered table with 4 micro-partitions](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/clustering.png)
 The table consists of 24 rows stored across 4 micro-partitions, with the rows divided equally between each micro-partition. Within each micro-partition, the data is sorted and stored by column
 
 
