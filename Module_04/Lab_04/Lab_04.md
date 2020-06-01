@@ -81,7 +81,7 @@ Remember this image that shows depth of micro-partitions
 
 Let's create a table with clustering from the start. We will also switch to a Large warehouse to speed up the creation.  In order to see what how the table was created we can use the function **get_ddl**.
 
-![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Images/Lab_04/Images/get_ddl.png)
+![Image of get DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/get_ddl.png)
 
 ```sql
 
@@ -92,7 +92,7 @@ This function allows you to see what the column names are and what the column ty
  
 Now we can create the new table that will be clustered.
 
-![Image of get_DDL](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/12_create_cluster_table.png)
+![Image of create the clustered table](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/12_create_cluster_table.png)
 
 ```sql
 
@@ -130,10 +130,6 @@ This table was created much faster with the large data warehouse.
 ![Image of 100 percent done ](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/16_qp_create_cluster_table_step2_create_100.png)
 
 ### So let's take a look at the clustering now!  
- 
-I bet you expect the table to be clustered already...
-
-![Alt Text](https://media.giphy.com/media/Wq9RLX06zRg4UM42Qf/giphy.gif)
 
 
 An item to note is that since this table already has clustering added you don't have to enter in the column that you are getting for clustering info on it.  It will autmatically pick the clustered column. You can see the query below that is slightly different from the queries we used before to get the clustering information.  
@@ -147,7 +143,10 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_CLUSTER')
 As you can see the table is barely clustered. 
 ![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
 
-![Alt Text](https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif) 
+I bet you expect the table to be clustered already...
+
+![Alt Text](https://media.giphy.com/media/Wq9RLX06zRg4UM42Qf/giphy.gif)
+
 
 Well because it takes time for a table to be optimized
 
@@ -159,6 +158,7 @@ Well because it takes time for a table to be optimized
  8min in 
 ![Image of clustering 8min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/21_clustering_info_cluster_market_8min.png)
 
+![Alt Text](https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif) 
  
  10min in 
 ![Image of clustering 10min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/23_clustering_info_cluster_market_10min.png)
