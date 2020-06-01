@@ -46,9 +46,10 @@ SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10000.CUSTOMER;
 One thing to take note is that I used a warehouse that was xsmall so it took over 30 mins to create the table 
 
 **Question** What can I do to speed up the creation of the table? 
-
+ 
+ 60% complete
 ![Image of Clicking on QP 60% complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/8_qp_create_cluster_table_step2_create_40.png)
-
+ 90% complete
 ![Image of Clicking on QP 90% complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/9_qp_create_cluster_table_step2_create_70.png)
 
 ```sql
@@ -66,9 +67,13 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_NOCLUSTER
 
 ![Image of clustering info_marketing](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/10_clustering_info_nocluster_market_imediate.png)
 
+Remember this image that shows depth of micro-partitions
+
+![Image of clustering info_marketing](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/overlapping.png)
+
 ![Image of clustering info_customer key](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/11_clustering_info_nocluster_cust_key.png)
 
-**Question** What is different about the two items that clustering info?  
+**Question** What is different about the two items in the clustering info?  
  
  *Take note of comment for the clustering information on the customer key.  It let's you know that this might not be the best metric to create a cluster.*
  
@@ -110,18 +115,28 @@ SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10000.CUSTOMER;
 This table was created much faster with the large data warehouse.
 *Only took 3 min to create the table this time*
 
+ 
+ 10% done
 ![Image of 10 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/13_qp_create_cluster_table_step2_create_10.png)
+ 
+ 30% done
 ![Image of 30 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/14_qp_create_cluster_table_step2_create_20.png)
+ 
+ 80% done
 ![Image of 80 percent done](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/15_qp_create_cluster_table_step2_create_80.png)
+
+ 
+ 100% done
 ![Image of 100 percent done ](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/16_qp_create_cluster_table_step2_create_100.png)
 
-So let's take a look at the clustering now!  I bet you expect the table to be clustered already...
+### So let's take a look at the clustering now!  
+ 
+I bet you expect the table to be clustered already...
 
 ![Alt Text](https://media.giphy.com/media/Wq9RLX06zRg4UM42Qf/giphy.gif)
 
-![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
 
-Since this table already has clustering added you don't have to enter in the column that you are getting for clustering info on it.  It will autmatically pick the clustered column.
+An item to note is that since this table already has clustering added you don't have to enter in the column that you are getting for clustering info on it.  It will autmatically pick the clustered column. You can see the query below that is slightly different from the queries we used before to get the clustering information.  
 
 ```sql
 
@@ -129,21 +144,46 @@ SELECT SYSTEM$CLUSTERING_INFORMATION('MY_PRACTICE_DB.PRACTICE.CUSTOMER_CLUSTER')
 
 ```
 
+As you can see the table is barely clustered. 
+![Image of clustering imediate](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/19_clustering_info_cluster_market_4min.png)
+
+![Alt Text](https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif) 
+
+Well because it takes time for a table to be optimized
+
+ 
+ 6min in 
 ![Image of clustering 6min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/20_clustering_info_cluster_market_6min.png)
 
+ 
+ 8min in 
 ![Image of clustering 8min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/21_clustering_info_cluster_market_8min.png)
 
+ 
+ 10min in 
 ![Image of clustering 10min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/23_clustering_info_cluster_market_10min.png)
 
+ 
+ 15min in 
 ![Image of clustering 15 min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/24_clustering_info_cluster_market_15min.png)
 
+ 
+ 20min in 
 ![Image of clustering 20min](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/25_clustering_info_cluster_market_20min.png)
+
+ 
+ 2 hrs in but it didn't improve 
+ :-1:
+:thumbsdown:
 
 ![Image of clustering 2hrs](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/26_clustering_info_cluster_market_2hr.png)
 
 *It took 20 mins for the clustering to be added even though we clustered the table from the beginning*
 
 **Question** What if we add clustering after the table is created?
+
+### Reclustering an unclustered table
+
 
 ![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/36_alter_table_nocluster.png)
 
@@ -165,6 +205,8 @@ ALTER TABLE MY_PRACTICE_DB.PRACTICE.CUSTOMER_NOCLUSTER RECLUSTER;
 
 ![Image of clustering added after table is created](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/40_qp_recluster.png)
 
+*hmmm how long will this take now?*
+
 ![Image of reclustering time to complete](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/39_time_complete_recluster.png)
 
 *It took about 6 min to recluster the table*
@@ -184,12 +226,15 @@ SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10000.CUSTOMER
 ORDER BY C_MKTSEGMENT;
 
 ```
+*It will take longer to complete since the query is adding a sorting step* 
 
 ![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/29_qp_create_nocluster_order_sort.png)
 
 ![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/30_qp_create_nocluster_order_tablescan2.png)
 
 ![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/31_qp_create_nocluster_order_tablescan3.png)
+
+![Alt Text](https://media.giphy.com/media/3oz8xKaR836UJOYeOc/giphy.gif)
 
 ![Image of creating a no cluster table with order](https://github.com/ferninphilly/developintelligence_snowflake/blob/master/Module_04/Lab_04/Images/32_qp_create_nocluster_order_tablescan4.png)
 
