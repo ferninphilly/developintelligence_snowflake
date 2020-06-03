@@ -1,0 +1,3 @@
+{"hero": {"name": "batman", "power": "being rich","location": "Gotham city"},"enemy": "Joker","first_comic": "05-01-1939"}
+{"hero": {"name": "superman", "power": "flying and super strength","home": "metropolis"},"enemy": "Lex Luthor","first_comic": "06-01-1938"}
+{"hero": {"name": "wonder woman","power": "super strength"},"home": "themyscira","enemy": "cheetah", "first_comic":"10-01-2941" }

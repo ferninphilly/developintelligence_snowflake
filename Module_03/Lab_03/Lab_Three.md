@@ -184,4 +184,143 @@ Run this command:
 
 ## Uploading with PYTHON
 
-Okay...so our final methodology for interacting 
+Okay...so our final methodology for interacting with Snowflake is through Python. The first thing we want to do here is make sure that we have the appropriate library installed. 
+SO...from your command line either type in: 
+`ipython` (if you have that one installed) or...
+`python` (or maybe `python3` if you have that intalled?)
+
+![snowflakeconnector](./images/snowflakeconnector.jpeg)
+
+Once everything is open try running `import snowflake.connector`.
+
+IF IT FAILS you probably need to `pip install --upgrade snowflake-connector-python`
+
+Now let's connect! Change the values here to your appropriate parameters and put in:
+
+```python
+ctx = snowflake.connector.connect(
+    user='frodo',
+    password='precious',
+    account='jc91620.eu-west-1' #Replace with your account
+    )
+```
+
+Now let's go ahead and create our cursor and check that we are connected!
+
+```python
+cs = ctx.cursor()
+try:
+    cs.execute("SELECT current_version()")
+    one_row = cs.fetchone()
+    print(one_row[0])
+finally:
+    cs.close()
+ctx.close()
+
+```
+
+If you got back something like `4.19.1` then you are good to go! 
+
+Let's load some data! 
+First let's create a **temporary table** that we can load data into. You might need to reopen everything here because we closed the cursor before:
+
+```python
+cs.execute("USE warehouse hobbit;")
+cs.execute("USE mordor;")
+cs.execute("""
+create or replace temporary table home_sales (
+  city string,
+  zip string,
+  state string,
+  type string default 'Residential',
+  sale_date timestamp_ntz,
+  price string
+  );
+  """
+)
+cs.fetchall()
+```
+
+Now let's create our file format! This is (obviously) just our way of making sure that our JSON goes in smoothly! Obviously we're doing newline as the record delimiter and no field delimiter:
+
+```python
+cs.execute("""
+create or replace file format sf_tut_csv_format
+  field_delimiter = none
+  record_delimiter = '\\n';
+  """)
+cs.fetchall()
+```
+
+And now let's create a *temporary* stage (yes- you can totally do that!):
+
+```python
+cs.execute("""
+create or replace temporary stage sf_tut_stage
+  file_format = sf_tut_csv_format;
+  """)
+cs.fetchall()
+```
+
+Okay! Step one! Let's put this into the stage!!
+
+```python
+cs.execute("put file:///Users/fernandopombeiro/github_projects/developintelligence_snowflake/Module_03/Lab_03/lab_data/sample-json-file.json @sf_tut_stage")
+cs.fetchall()
+```
+
+Okay..data is in stage so now onto the PUT sample. Let's see what we can get going here! 
+
+```python
+cs.execute("""
+copy into home_sales(city, state, zip, sale_date, price)
+   from (select substr(parse_json($1):location.state_city,4), substr(parse_json($1):location.state_city,1,2),
+                parse_json($1):location.zip, to_timestamp_ntz(parse_json($1):sale_date), parse_json($1):price
+         from @sf_tut_stage/sample-json-file.json.gz t)
+   on_error = 'continue';
+""")
+cs.fetchall()
+```
+
+Finally- let's run the query to see if everything made it in! 
+
+```python
+cs.execute("select * from home_sales;")
+cs.fetchall()
+```
+
+Notice the `parse_json` function there? Let's look into that a little bit! 
+Obviously in this case we were translating a multi-dimensional json into a single dimensional json using the `($1)` signifier which, as you can tell from the context here: `parse_json($1):price` does a search-from-root check to parse the json. When we want to substring we can use a "." format to get to the substring. 
+
+### CHALLENGE FIVE: USING THE CHALLENGE JSON LOAD EVERYTHING INTO TEMPORARY TABLES ABOUT HEROES!
+
+
+## Parse_json sample
+
+Finally let's look at another quick example using temporary tables to demonstrate. Let's run this in the GUI:
+
+```sql
+create or replace temporary table vartab (n number(2), v variant);
+
+insert into vartab
+    select column1 as n, parse_json(column2) as v
+    from values (1, 'null'), 
+                (2, null), 
+                (3, 'true'),
+                (4, '-17'), 
+                (5, '123.12'), 
+                (6, '1.912e2'),
+                (7, '"Om ara pa ca na dhih"  '), 
+                (8, '[-1, 12, 289, 2188, false,]'), 
+                (9, '{ "x" : "abc", "y" : false, "z": 10} ') 
+       as vals;
+```
+
+SO! Let's take a quick look at how this looks by `type`:
+
+`select n, v, typeof(v) from vartab;`
+
+And you should get a look at the types!
+
+![typeof](./images/typeof.png)
+
